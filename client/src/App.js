@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   // get saved articles from /api/articles and update state
-  getSavedArticles() {
+  getSavedArticles = () => {
     api.getArticles().then( articles => {
       this.setState({savedArticles: articles.data } );
     })
@@ -56,9 +56,9 @@ class App extends Component {
 
           <SearchForm submitHandler={this.handleSearchSubmit}/>
 
-          <SearchResults articles={this.state.searchResults}/>
+          <SearchResults getSavedArticles={this.getSavedArticles} articles={this.state.searchResults}/>
           
-          <SavedArticles articles={this.state.savedArticles}/>
+          <SavedArticles getSavedArticles={this.getSavedArticles} articles={this.state.savedArticles}/>
         </div>
       </div>
     );
