@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import moment from "moment";
+import axios from "axios";
 
 class SavedArticles extends Component {
   constructor(props) {
@@ -9,6 +11,15 @@ class SavedArticles extends Component {
 
   }
 
+  handleDelete = event => {
+    event.preventDefault();
+
+    axios.delete('/api/articles/' + event.target.getAttribute('data-id'))
+    .then( response => {
+      this.props.getSavedArticles();
+    })
+    .catch( error => console.log(error));
+  }
 
   render() {
     return (
@@ -21,8 +32,11 @@ class SavedArticles extends Component {
             {
               this.props.articles.map( article => {
                 return (
-                  <li className="list-group-item">
-                    <a href={article.url}>{article.title}</a> date: {article.date}
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <a className="align-middle" href={article.url}>{article.title} </a><span className="article-date small"> {moment(article.date).format('MMMM Do YYYY')}</span>
+                    </div>
+                    <button onClick={this.handleDelete} data-id={article._id} className="btn btn-danger ml-3">Delete</button>
                   </li>
                 );
               })
