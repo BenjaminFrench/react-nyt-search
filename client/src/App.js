@@ -4,15 +4,15 @@ import "./App.css";
 
 import SearchResults from "./components/searchResults/searchResults";
 import SavedArticles from "./components/savedArticles/savedArticles";
+import SearchForm from "./components/searchForm/searchForm";
 
 import api from "./utils/API"
-import SearchForm from "./components/searchForm/searchForm";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [1,2,3,4,4],
+      searchResults: [],
       savedArticles: []
     }
 
@@ -31,7 +31,19 @@ class App extends Component {
   }
 
   handleSearchSubmit = (topic, startYear, endYear) => {
-    console.log(topic,startYear,endYear);
+    if (startYear.length === 4) {
+      startYear += '0101';
+    }
+    if (endYear.length === 4) {
+      endYear += '0101';
+    }
+
+    api.searchArticles(topic, startYear, endYear)
+    .then( response => {
+      console.log(response.data);
+      this.setState( {searchResults: response.data});
+    })
+    .catch( error => console.log(error));
   }
 
   render() {
