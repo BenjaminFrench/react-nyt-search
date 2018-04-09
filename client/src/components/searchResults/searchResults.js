@@ -4,14 +4,6 @@ import "./searchResults.css"
 import SingleResult from "./singleResult";
 
 class SearchResults extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
-
 
   render() {
     return (
@@ -22,9 +14,9 @@ class SearchResults extends Component {
           </div>
           <ul className="list-group">
             {
-              this.props.articles.map( article => {
+              this.props.articles.map( (article , index) => {
                 return (
-                  <SingleResult getSavedArticles={this.props.getSavedArticles} article={article}/>
+                  <SingleResult getSavedArticles={this.props.getSavedArticles} article={article} key={index}/>
                 );
               })
             }
