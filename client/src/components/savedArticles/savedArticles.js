@@ -3,13 +3,6 @@ import moment from "moment";
 import axios from "axios";
 
 class SavedArticles extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
 
   handleDelete = event => {
     event.preventDefault();
@@ -30,9 +23,9 @@ class SavedArticles extends Component {
           </div>
           <ul className="list-group">
             {
-              this.props.articles.map( article => {
+              this.props.articles.map( (article, index) => {
                 return (
-                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                  <li className="list-group-item d-flex justify-content-between align-items-center" key={index}>
                     <div>
                       <a className="align-middle" href={article.url}>{article.title} </a><span className="article-date small"> {moment(article.date).format('MMMM Do YYYY')}</span>
                     </div>

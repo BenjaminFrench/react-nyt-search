@@ -5,6 +5,7 @@ import axios from "axios";
 class SingleResult extends Component {
   handleSave = event => {
     event.preventDefault();
+    event.persist();
 
     // post to /api/articles
     var newArticle =  {
@@ -16,6 +17,8 @@ class SingleResult extends Component {
     axios.post('/api/articles', newArticle)
     .then( response => {
       this.props.getSavedArticles();
+      event.target.innerText = 'Saved';
+      event.target.disabled = true;
     })
     .catch( error => console.log(error));
   }
