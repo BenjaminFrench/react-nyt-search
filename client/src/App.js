@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -53,7 +54,6 @@ class App extends Component {
           <div className="jumbotron">
             <h1>React nyt search</h1>
           </div>
-
           <SearchForm submitHandler={this.handleSearchSubmit}/>
 
           <SearchResults getSavedArticles={this.getSavedArticles} articles={this.state.searchResults}/>
